@@ -30,6 +30,9 @@
     <Filter Include="Text Files\Shaders">
       <UniqueIdentifier>{ae872e5b-508c-47ce-9952-da8b67c77e79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core Headers">
+      <UniqueIdentifier>{69ca5548-9946-441c-9d3c-860afad4fabf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\Class Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Core Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,9 @@
     <ClInclude Include="Object.h">
       <Filter>Header Files\Class Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Core Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log_File.Log">
@@ -111,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DEV.data">
+      <Filter>Text Files</Filter>
+    </None>
+    <None Include="Save Data.Saves">
       <Filter>Text Files</Filter>
     </None>
   </ItemGroup>

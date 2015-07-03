@@ -5,9 +5,13 @@ using namespace std;
 class Hephaestus{
 private:
 	GLFWwindow* Current_Window;
-	int Mouse_Click_XPos, Mouse_Click_YPos, Current_Mouse_X, Current_Mouse_Y, Mouse_Button, Key;
+	int Mouse_Click_XPos, Mouse_Click_YPos, Current_Mouse_X, Current_Mouse_Y, Mouse_Button, Mouse_Action, Mouse_Mods, Key;
 	bool Custom_Cursor, First;
 	Layer Top;
+
+	double xpos, ypos;
+	int resx, resy;
+	float x, y, cx, cy;
 public:
 	/*----->>>>>Declarations<<<<<-----*/
 	vector<Layer*> Layers;
@@ -25,6 +29,11 @@ public:
 	/*-----User Input-----*/
 	void Key_Call_Back(GLFWwindow* Win, int key, int scancode, int action, int mods);
 	void Mouse_Call_Back(GLFWwindow* Win, int button, int action, int mods);
+	int Return_Key_Int();
+	string Return_Key_String();
+	char Return_Key_Char();
+	void Set_Key(int Key);
+	void Set_Mouse(int x, int y);
 	/*-----Layers-----*/
 	/*>>Layer Actions<<*/
 	void Run();

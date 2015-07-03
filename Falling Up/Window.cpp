@@ -148,6 +148,7 @@ void Window::Set_Window(int i, int f){
 	F = f;
 }
 void Window::Window_Res(int& x, int& y){
+	Get_Resolution(I);
 	x = X;
 	y = Y;
 }

@@ -16,6 +16,7 @@ GLFWwindow* Hephaestus::Full_Setup(){
 GLFWwindow* Hephaestus::New_Window(){
 	GLFWwindow* win = Win.Setup_Window();
 	Set_Window(win);
+	Win.Window_Res(resx, resy);
 	return(win);
 }
 void Hephaestus::Frame(){
@@ -87,6 +88,33 @@ void Hephaestus::Mouse_Call_Back(GLFWwindow* Win, int button, int action, int mo
 	Mouse_Click_XPos = xpos;
 	Mouse_Click_YPos = ypos;
 	Mouse_Button = button;
+	Mouse_Action = action;
+	Mouse_Mods = mods;
+}
+int Hephaestus::Return_Key_Int(){
+	return(Key);
+}
+string Hephaestus::Return_Key_String(){
+	char val = char(Key);
+	stringstream ss;
+	string str;
+	ss << val;
+	ss >> str;
+	if (Key == 32){
+		str = " ";
+	}
+	return(str);
+}
+char Hephaestus::Return_Key_Char(){
+	char val = char(Key);
+	return(val);
+}
+void Hephaestus::Set_Key(int key){
+	Key = key;
+}
+void Hephaestus::Set_Mouse(int x, int y){
+	Mouse_Click_XPos = x;
+	Mouse_Click_YPos = y;
 }
 /*>>>>>-----Layers-----<<<<<*/
 /*-----Layer Actions-----*/
@@ -138,11 +166,8 @@ void Hephaestus::Clear_All_Layer_Animation(){
 	}
 }
 void Hephaestus::Check_All_Buttons(int& Layer, int&Button, int& Action){
-	double xpos, ypos;
-	int resx, resy;
-	float x, y, cx, cy;
 	glfwGetCursorPos(Current_Window, &xpos, &ypos);
-	Win.Window_Res(resx, resy);
+	
 	Current_Mouse_X = xpos;
 	Current_Mouse_Y = ypos;
 	Action = Mouse_Button;

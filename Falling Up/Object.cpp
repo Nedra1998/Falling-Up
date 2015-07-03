@@ -1078,14 +1078,18 @@ void Object::Run_Particals(){
 
 				Range = (rand() % Partical_Life_Range);
 				life = Partical_Life + Range;
-				Temp_Int = (Spawner_X * 200000);
+				Temp_Int = (Spawner_X * 100);
 				x = (rand() % Temp_Int);
-				x = x / 100000;
-				x = x - Spawner_X;
-				Temp_Int = (Spawner_Y * 200000);
+				x = x / 100;
+				if (rand() % 2 == 0){
+					x = x * -1;
+				}
+				Temp_Int = (Spawner_Y * 100);
 				y = (rand() % Temp_Int);
-				y = y / 100000;
-				y = y - Spawner_Y;
+				y = y / 100;
+				if (rand() % 2 == 0){
+					y = y * -1;
+				}
 				Partical_Object* Temp = new Partical_Object;
 				Temp->Acceleration_X = ax;
 				Temp->Acceleration_Y = ay;
