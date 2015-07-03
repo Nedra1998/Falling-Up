@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hephaestus.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Logging.cpp" />
@@ -80,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Classes.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Hephaestus.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Libraries.h" />
