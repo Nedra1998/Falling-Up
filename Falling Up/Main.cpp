@@ -9,10 +9,12 @@ Menu M;
 void Key_Call(GLFWwindow* Win, int key, int scancode, int action, int mods){
 	H.Key_Call_Back(Win, key, scancode, action, mods);
 	M.H_Menu.Key_Call_Back(Win, key, scancode, action, mods);
+	M.G_Menu.H_Game.Key_Call_Back(Win, key, scancode, action, mods);
 }
 void Mouse_Call(GLFWwindow* Win, int button, int action, int mods){
 	H.Mouse_Call_Back(Win, button, action, mods);
 	M.H_Menu.Mouse_Call_Back(Win, button, action, mods);
+	M.G_Menu.H_Game.Mouse_Call_Back(Win, button, action, mods);
 }
 void Window_Call(GLFWwindow* Win, int width, int hight){
 	glfwSetWindowSize(Win, width, hight);

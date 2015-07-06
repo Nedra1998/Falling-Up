@@ -657,6 +657,7 @@ int Object::Move_Object(float x, float y, float z, int level, float Max_Move){
 				if (Collision_Objects[a]->Object_Type == 10 || Collision_Objects[a]->Object_Type == 11){
 					Return = a;
 				}
+				Return = Collision_Objects[a]->Return_Float_Value(14) + Collision_Objects.size();
 			}
 		}
 		if (Return == -1){
@@ -697,7 +698,7 @@ void Object::Run_Animation(){
 }
 void Object::Set_Collision_Set(vector<Object*> Collisions, int Start, int Ignore){
 	for (unsigned a = Start; a < Collisions.size(); a++){
-		if (Collisions[a]->Return_Float_Value(14) == Object_Data[14] && a != Ignore){
+		if (a != Ignore){
 			Collision_Objects.push_back(Collisions[a]);
 		}
 	}
@@ -1183,7 +1184,11 @@ void Object::Set_Object_Friction(float friction_s, float friction_k){
 	Friction_Static = friction_s;
 	Friction_Kinetic = friction_k;
 }
-void Object::Accelerate_Physics_Object(float x, float y, float z){
+void Object::Set_Acceleration_Physics_Object(float x, float y, float z){
+	Acceleration_X = x;
+	Acceleration_Y = y;
+}
+void Object::Add_Acceleration_Physics_Object(float x, float y, float z){
 	Acceleration_X = Acceleration_X + x;
 	Acceleration_Y = Acceleration_Y + y;
 }
@@ -1242,15 +1247,11 @@ void Object::Display_Physics_Object(){
 	Physics->Display_Object();
 }
 void Object::Set_Collsion_Objects(vector<Object*> Collisions, int Start, int Ignore){
-	for (unsigned a = Start; a < Collisions.size(); a++){
-		if (Collisions[a]->Return_Float_Value(14) == Object_Data[14] && a != Ignore){
-			Collision_Objects.push_back(Collisions[a]);
-		}
-	}
+	Set_Collision_Set(Collisions, Start, Ignore);
 	Physics->Set_Collision_Set(Collisions, Start, Ignore);
 }
-void Object::Run_Physics(){
-	int Return = -3;
+void Object::Run_Physics(int &x, int &y){
+	int Return = -3, Final = -1;
 	float Distance_X, Distance_Y, Tic = (float)1/(float)60;
 	Distance_X = (Velocity_X *Tic) + (0.5 * Acceleration_X * (Tic * Tic));
 	Distance_Y = (Velocity_Y *Tic) + (0.5 * Acceleration_Y * (Tic * Tic));
@@ -1258,17 +1259,35 @@ void Object::Run_Physics(){
 	if (Return != -1){
 		Velocity_X = -1 * (Velocity_X * (Reflection_Percent / (float)100));
 	}
-	if (Return >= 0 && Transfer_Percent != 0){
+	if (Return >= 0 && Transfer_Percent != 0 && Return < Collision_Objects.size()){
 		Collision_Objects[Return]->Add_Velocity_Physics_Object(-1* Velocity_X * (Transfer_Percent / (float)100), 0.0, 0.0);
 		Velocity_X = Velocity_X - Velocity_X * (Transfer_Percent / (float)100);
 	}
+	else if (Return >= Collision_Objects.size()){
+		Return = Return - Collision_Objects.size();
+	}
+	Final = Return;
+	Return = Physics->Move_Object(0.0, Distance_Y, 0.0, 0, 0.05);
 	if (Return != -1){
 		Velocity_Y = -1 * (Velocity_Y * (Reflection_Percent / (float)100));
 	}
-	if (Return >= 0 && Transfer_Percent != 0){
+	if (Return >= 0 && Transfer_Percent != 0 && Return < Collision_Objects.size()){
 		Collision_Objects[Return]->Add_Velocity_Physics_Object(0.0, -1 * Velocity_Y * (Transfer_Percent / (float)100), 0.0);
 		Velocity_Y = Velocity_Y - Velocity_Y * (Transfer_Percent / (float)100);
 	}
+	else if (Return >= Collision_Objects.size()){
+		Return = Return - Collision_Objects.size();
+	}
 	Velocity_X = Velocity_X + (Acceleration_X * Tic);
 	Velocity_Y = Velocity_Y + (Acceleration_Y * Tic);
+	x = Final;
+	y = Return;
+}
+float Object::Return_Physics_Data(int Value){
+	if (Value == 1){
+		return(Velocity_X);
+	}
+	if (Value == 2){
+		return(Velocity_Y);
+	}
 }

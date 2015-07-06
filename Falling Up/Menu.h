@@ -1,4 +1,5 @@
 #include "Libraries.h"
+#include "Game.h"
 using namespace std;
 class Menu{
 private:
@@ -12,6 +13,7 @@ private:
 public:
 	Hephaestus H_Menu;
 	GLFWwindow* W_Menu;
+	Game G_Menu;
 	void Begin_Menu_Program(Hephaestus H, GLFWwindow* W);
 	int Run_Menu_Program(int menu);
 };

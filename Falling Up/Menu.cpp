@@ -416,6 +416,72 @@ int Menu::On_Click(){
 			Return = Menu_Number - 1;
 		}
 		if (Button != 0 && Button != 1 && Button != 2 && Button != 3 && Level >= Button - 3){
+			int Pass = -1;
+			H_Menu.Clear_All_Layers();
+			Pass = G_Menu.Begin_Game_Program(H_Menu, W_Menu, Button - 3);
+			if (Pass == 1){
+				string a = "", b = "", c = "";
+				int al = -1, bl = -1, cl = -1;
+				string Temp;
+				ifstream Load("Save Data.Saves");
+				if (Load.is_open()){
+					for (int i = 0; i < 3; i++){
+						getline(Load, Temp);
+						if (i == 0){
+							a = Temp;
+						}
+						if (i == 1){
+							b = Temp;
+						}
+						if (i == 2){
+							c = Temp;
+						}
+						if (Temp != "<NONE>"){
+							if (i == 0){
+								Load >> Level_1;
+							}
+							if (i == 1){
+								Load >> Level_2;
+							}
+							if (i == 2){
+								Load >> Level_3;
+							}
+							getline(Load, Temp);
+						}
+					}
+					Load.close();
+				}
+				if (Save_Number == 1){
+					Level_1++;
+				}
+				if (Save_Number == 2){
+					Level_2++;
+				}
+				if (Save_Number == 3){
+					Level_3++;
+				}
+				ofstream Save("Save Data.Saves");
+				if (Save.is_open()){
+					Save << a << "\n";
+					if (a != "<NONE>"){
+						Save << Level_1 << "\n";
+					}
+					Save << b << "\n";
+					if (b != "<NONE>"){
+						Save << Level_2 << "\n";
+					}
+					Save << c << "\n";
+					if (c != "<NONE>"){
+						Save << Level_3 << "\n";
+					}
+					Save.close();
+				}
+			}
+			H_Menu.Create_New_Layer();
+			H_Menu.Layers[0]->Initilize_Object(5);
+			H_Menu.Layers[0]->Partical_Objects[0]->New_Partical_Spawner(0, 1.0, 1.0);
+			H_Menu.Layers[0]->Partical_Objects[0]->Set_Color_Partial_Spawner_Data(100, 3, 10, 5, 0.005, 0.005, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 300, 60, 1.0, 1.0, 1.0, 1.0, true);
+			Return = Menu_Number;
 		}
 		return(Return);
 	}

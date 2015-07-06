@@ -91,8 +91,9 @@ void Layer::Run_All_Particals(){
 	}
 }
 void Layer::Run_All_Physics(){
+	int x, y;
 	for (unsigned i = 0; i < Physics_Objects.size(); i++){
-		Physics_Objects[i]->Run_Physics();
+		Physics_Objects[i]->Run_Physics(x, y);
 	}
 }
 void Layer::Run_All_Animations(){

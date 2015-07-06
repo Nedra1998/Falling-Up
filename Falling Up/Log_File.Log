@@ -1,0 +1,17 @@
+Mon Jul 06 14:04:15 2015
+[SUCCESS]>>Opened Log File<<[Logging]
+[SUCCESS]>>Loaded Window Data<<[Window]
+[INFORMATION]>>Windowed Mode Enabled<<[Window]
+[SUCCESS]>>Loaded Resolution<<[Window]
+[INFORMATION]>>Resoulution Of Window Is:[720:480]<<[Window]
+[SUCCESS]>>Loaded GLFW<<[Window]
+[SUCCESS]>>Loaded GLEW<<[Window]
+[SUCCESS]>>Loaded Renderer<<[Window]
+[SUCCESS]>>Loaded Version<<[Window]
+[SUCCESS]>>Loaded Resolution<<[Window]
+[SUCCESS]>>Opened Textured Vertex Shader.txt<<[Shaders]
+[SUCCESS]>>Opened Textured Fragment Shader.txt<<[Shaders]
+[SUCCESS]>>Opened Colored Vertex Shader.txt<<[Shaders]
+[SUCCESS]>>Opened Colored Fragment Shader.txt<<[Shaders]
+[SUCCESS]>>Closed Log File<<[Logging]
+Mon Jul 06 14:04:35 2015

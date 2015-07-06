@@ -131,7 +131,8 @@ public:
 	void New_Texture_Physics_Object(string texture, int points, float xsize, float ysize, int colision);
 	void Set_Object_Mass(float mass);
 	void Set_Object_Friction(float friction_s, float friction_k);
-	void Accelerate_Physics_Object(float x, float y, float z);
+	void Set_Acceleration_Physics_Object(float x, float y, float z);
+	void Add_Acceleration_Physics_Object(float x, float y, float z);
 	void Translate_Physics_Object(float x, float y, float z);
 	void Set_Velocity_Physics_Object(float x, float y, float z);
 	void Add_Velocity_Physics_Object(float x, float y, float z);
@@ -142,6 +143,6 @@ public:
 	void Reset_Physics_Data(int Type);
 	void Display_Physics_Object();
 	void Set_Collsion_Objects(vector<Object*> Collisions, int Start, int Ignore);
-	void Run_Physics();
-
+	void Run_Physics(int &x, int &y);
+	float Return_Physics_Data(int Value);
 };
