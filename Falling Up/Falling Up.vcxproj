@@ -92,6 +92,7 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Block Ids.txt" />
     <Text Include="Colored Fragment Shader.txt" />
     <Text Include="Colored Vertex Shader.txt" />
     <Text Include="Log_File.Log" />

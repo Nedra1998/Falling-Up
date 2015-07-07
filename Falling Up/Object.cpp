@@ -1252,7 +1252,7 @@ void Object::Set_Collsion_Objects(vector<Object*> Collisions, int Start, int Ign
 }
 void Object::Run_Physics(int &x, int &y){
 	int Return = -3, Final = -1;
-	float Distance_X, Distance_Y, Tic = (float)1/(float)60;
+	float Distance_X, Distance_Y, Tic = (float)1 / (float)60;
 	Distance_X = (Velocity_X *Tic) + (0.5 * Acceleration_X * (Tic * Tic));
 	Distance_Y = (Velocity_Y *Tic) + (0.5 * Acceleration_Y * (Tic * Tic));
 	Return = Physics->Move_Object(Distance_X, 0.0, 0.0, 0, 0.05);

@@ -451,14 +451,16 @@ int Menu::On_Click(){
 					}
 					Load.close();
 				}
-				if (Save_Number == 1){
-					Level_1++;
-				}
-				if (Save_Number == 2){
-					Level_2++;
-				}
-				if (Save_Number == 3){
-					Level_3++;
+				if (Level == Button - 3){
+					if (Save_Number == 1){
+						Level_1++;
+					}
+					if (Save_Number == 2){
+						Level_2++;
+					}
+					if (Save_Number == 3){
+						Level_3++;
+					}
 				}
 				ofstream Save("Save Data.Saves");
 				if (Save.is_open()){

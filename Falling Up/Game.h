@@ -2,10 +2,13 @@
 using namespace std;
 class Game{
 private:
-	float Gravity_Y, Gravity_X, Jump, Jump_Hold, Jump_Original;
+	float Gravity_Y, Gravity_X, Jump, Jump_Original, Spawn_X, Spawn_Y;
 	int Level;
+	bool Key, Fall;
 	int Load_Level();
 	int Run_Level();
+	int On_Collide(int x, int y);
+	int Every_Frame();
 public:
 	Hephaestus H_Game;
 	GLFWwindow* W_Game;
