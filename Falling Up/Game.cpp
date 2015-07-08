@@ -3,7 +3,7 @@
 #include "Hephaestus.h"
 #include "Game.h"
 using namespace std;
-
+/*-----GAME-----*/
 int Game::Begin_Game_Program(Hephaestus H, GLFWwindow* W, int level){
 	H_Game = H;
 	W_Game = W;
@@ -231,5 +231,106 @@ int Game::Every_Frame(){
 			return(1);
 		}
 	}
+	return(0);
+}
+
+/*-----LEVEL EDITOR-----*/
+int Game::Run_Level_Editor_1(Hephaestus H, GLFWwindow* W){
+	int Create = 1;
+	int Layer = -1, Button = -1, Action = -1, Selected = 0, Delay = 15;
+	string X = "20", Y = "20";
+	H_Game = H;
+	W_Game = W;
+	H_Game.Clear_All_Layers();
+	H_Game.Layers[0]->Initilize_Object(4);
+	H_Game.Layers[0]->Button_Objects[0]->New_Button_Object("Level Creator", "Textures/Buttons/Transparent", "Basic/White", 0.8, 0.4);
+	H_Game.Layers[0]->Button_Objects[0]->Translate_Button_Object(0.0, 0.7, 0.0);
+	H_Game.Layers[0]->Initilize_Object(4);
+	H_Game.Layers[0]->Button_Objects[1]->New_Button_Object(X, "Textures/Buttons/Button A", "Basic/White", 0.4, 0.2);
+	H_Game.Layers[0]->Button_Objects[1]->Translate_Button_Object(-0.5, 0.1, 0.0);
+	H_Game.Layers[0]->Initilize_Object(4);
+	H_Game.Layers[0]->Button_Objects[2]->New_Button_Object(Y, "Textures/Buttons/Button A", "Basic/White", 0.4, 0.2);
+	H_Game.Layers[0]->Button_Objects[2]->Translate_Button_Object(0.5, 0.1, 0.0);
+	H_Game.Layers[0]->Initilize_Object(4);
+	H_Game.Layers[0]->Button_Objects[3]->New_Button_Object("Back", "Textures/Buttons/Button A", "Basic/White", 0.45, 0.1);
+	H_Game.Layers[0]->Button_Objects[3]->Translate_Button_Object(-0.5, -0.5, 0.0);
+	H_Game.Layers[0]->Initilize_Object(4);
+	H_Game.Layers[0]->Button_Objects[4]->New_Button_Object("Create", "Textures/Buttons/Button A", "Basic/White", 0.45, 0.1);
+	H_Game.Layers[0]->Button_Objects[4]->Translate_Button_Object(0.5, -0.5, 0.0);
+	while (Create == 1){
+		if (Delay > 0){
+			Delay--;
+			H_Game.Set_Mouse(-1, -1);
+		}
+		else{
+			H_Game.Check_All_Buttons(Layer, Button, Action);
+		}
+		if (Button == 1 && Selected != 1){
+			Selected = 1;
+			H_Game.Layers[0]->Button_Objects[1]->New_Button_Object(X, "Textures/Buttons/Button C", "Basic/White", 0.4, 0.2);
+			H_Game.Layers[0]->Button_Objects[2]->New_Button_Object(Y, "Textures/Buttons/Button A", "Basic/White", 0.4, 0.2);
+			H_Game.Layers[0]->Button_Objects[1]->Translate_Button_Object(-0.5, 0.1, 0.0);
+			H_Game.Layers[0]->Button_Objects[2]->Translate_Button_Object(0.5, 0.1, 0.0);
+		}
+		if (Button == 2 && Selected != 2){
+			Selected = 2;
+			H_Game.Layers[0]->Button_Objects[2]->New_Button_Object(X, "Textures/Buttons/Button C", "Basic/White", 0.4, 0.2);
+			H_Game.Layers[0]->Button_Objects[1]->New_Button_Object(Y, "Textures/Buttons/Button A", "Basic/White", 0.4, 0.2);
+			H_Game.Layers[0]->Button_Objects[1]->Translate_Button_Object(-0.5, 0.1, 0.0);
+			H_Game.Layers[0]->Button_Objects[2]->Translate_Button_Object(0.5, 0.1, 0.0);
+		}
+		if (Button == 3){
+			H_Game.Clear_All_Layers();
+			Create = 0;
+		}
+		if (Button == 4){
+			H_Game.Clear_All_Layers();
+			Create = 2;
+		}
+		if (Delay > 0){
+			Delay--;
+			H_Game.Set_Key(-1);
+		}
+		if (Delay == 0 && H_Game.Return_Key_Int() != -1 && H_Game.Return_Key_Int() != 259){
+			Delay = 15;
+			if (Selected == 1){
+				X = X + H_Game.Return_Key_String();
+				H_Game.Layers[0]->Button_Objects[1]->Edit_Button_Object(X);
+			}
+			if (Selected == 2){
+				Y = Y + H_Game.Return_Key_String();
+				H_Game.Layers[0]->Button_Objects[2]->Edit_Button_Object(Y);
+			}
+		}
+		if (Delay == 0 && H_Game.Return_Key_Int() == 259){
+			Delay = 15;
+			if (Selected == 1){
+				if ((X.size() - 1) != -1){
+					X.erase(X.end() - 1);
+				}
+				H_Game.Layers[0]->Button_Objects[1]->Edit_Button_Object(X);
+			}
+			if (Selected == 2){
+				if ((Y.size() - 1) != -1){
+					Y.erase(Y.end() - 1);
+				}
+				H_Game.Layers[0]->Button_Objects[2]->Edit_Button_Object(Y);
+			}
+		}
+		H_Game.Run();
+		H_Game.Frame();
+	}
+	if (Create == 2){
+		Level_X = stoi(X);
+		Level_Y = stoi(Y);
+		Create  = Run_Level_Editor_2();
+		if (Create == 3){
+
+		}
+	}
+	return(0);
+}
+int Game::Run_Level_Editor_2(){
+
 	return(0);
 }

@@ -19,8 +19,11 @@ int Menu::Load_Menu(){
 		H_Menu.Layers[1]->Button_Objects[3]->New_Button_Object("Settings", "Textures/Buttons/Button A", "Basic/White", 0.5, 0.1);
 		H_Menu.Layers[1]->Button_Objects[3]->Translate_Button_Object(0.0, -0.3, 0.0);
 		H_Menu.Layers[1]->Initilize_Object(4);
-		H_Menu.Layers[1]->Button_Objects[4]->New_Button_Object("Quit", "Textures/Buttons/Button A", "Basic/White", 0.5, 0.1);
+		H_Menu.Layers[1]->Button_Objects[4]->New_Button_Object("Level Editor", "Textures/Buttons/Button A", "Basic/White", 0.5, 0.1);
 		H_Menu.Layers[1]->Button_Objects[4]->Translate_Button_Object(0.0, -0.55, 0.0);
+		H_Menu.Layers[1]->Initilize_Object(4);
+		H_Menu.Layers[1]->Button_Objects[5]->New_Button_Object("Quit", "Textures/Buttons/Button A", "Basic/White", 0.5, 0.1);
+		H_Menu.Layers[1]->Button_Objects[5]->Translate_Button_Object(0.0, -0.8, 0.0);
 		return(1);
 	}
 	if (Menu_Number == 1){
@@ -253,6 +256,10 @@ int Menu::On_Click(){
 			Return = 1;
 		}
 		if (Button == 4){
+			G_Menu.Run_Level_Editor_1(H_Menu, W_Menu);
+			Return = 0;
+		}
+		if (Button == 5){
 			Return = -2;
 		}
 		return(Return);
